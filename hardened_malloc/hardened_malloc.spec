@@ -8,7 +8,7 @@ URL:            https://github.com/GrapheneOS/hardened_malloc
 Source0:        %{url}/archive/refs/tags/%{version}.tar.gz
 Source1:        30-hardened_malloc.conf
 
-BuildRequires:  systemd-rpm-macros
+BuildRequires:  systemd-rpm-macros rpm-build rpmdevtools rpmlint make
 
 
 # https://github.com/GrapheneOS/hardened_malloc/issues/200
