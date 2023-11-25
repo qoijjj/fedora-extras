@@ -24,6 +24,7 @@ Suggests:       bash-completion
 Suggests:       fish
 Suggests:       slirp4netns
 
+%global debug_package %{nil}
 
 %description
 Bubblejail is a bubblewrap-based alternative to Firejail.
