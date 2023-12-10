@@ -1,12 +1,11 @@
 Name:           hardened_malloc
 Version:        12
-Release:        1%{?dist}
+Release:        4%{?dist}
 Summary:        Hardened allocator designed for modern systems
 
 License:        MIT
 URL:            https://github.com/GrapheneOS/hardened_malloc
 Source0:        %{url}/archive/refs/tags/%{version}.tar.gz
-Source1:        30-hardened_malloc.conf
 
 BuildRequires:  systemd-rpm-macros rpm-build rpmdevtools rpmlint make gcc gcc-c++
 
@@ -25,17 +24,20 @@ will gain more portability / integration over time.
 
 %prep
 %autosetup
+cp config/default.mk config/pkey.mk
+sed -i 's/CONFIG_SEAL_METADATA := false/CONFIG_SEAL_METADATA := true/' config/pkey.mk
 
 
 %build
 make
 make VARIANT=light
+make VARIANT=pkey
 
 
 %install
-install -Dm0644 %{SOURCE1} %{buildroot}%{_sysctldir}/30-hardened_malloc.conf
-install -Dm0755 -s out/libhardened_malloc.so %{buildroot}%{_libdir}/libhardened_malloc.so
-install -Dm0755 -s out-light/libhardened_malloc-light.so %{buildroot}%{_libdir}/libhardened_malloc-light.so
+install -Dm4755 -s out/libhardened_malloc.so %{buildroot}%{_libdir}/libhardened_malloc.so
+install -Dm4755 -s out-light/libhardened_malloc-light.so %{buildroot}%{_libdir}/libhardened_malloc-light.so
+install -Dm4755 -s out-pkey/libhardened_malloc-pkey.so %{buildroot}%{_libdir}/libhardened_malloc-pkey.so
 
 
 %check
@@ -57,12 +59,23 @@ make test
 %files
 %license LICENSE CREDITS
 %doc README.md
-%{_sysctldir}/30-hardened_malloc.conf
 %{_libdir}/libhardened_malloc.so
 %{_libdir}/libhardened_malloc-light.so
+%{_libdir}/libhardened_malloc-pkey.so
 
 
 %changelog
+* Sun Dec 10 2023 rusty-snake - 12-4
+- Set set-user-id bit on libhardened_malloc.so.
+  Thanks to Tad for the finding and reporting.
+  Fixes #2
+
+* Sat Dec 09 2023 rusty-snake - 12-3
+- Remove 30-hardened_malloc.conf, Fedora 39 does this by default
+
+* Sat Dec 09 2023 rusty-snake - 12-2
+- Add pkey variant
+
 * Fri Sep 29 2023 rusty-snake - 12-1
 - Update to version 12
 
