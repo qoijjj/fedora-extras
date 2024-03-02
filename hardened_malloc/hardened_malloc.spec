@@ -29,9 +29,9 @@ sed -i 's/CONFIG_SEAL_METADATA := false/CONFIG_SEAL_METADATA := true/' config/pk
 
 
 %build
-make
-make VARIANT=light
-make VARIANT=pkey
+make CONFIG_NATIVE=false
+make CONFIG_NATIVE=false VARIANT=light
+make CONFIG_NATIVE=false VARIANT=pkey
 
 
 %install
