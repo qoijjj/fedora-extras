@@ -9,8 +9,9 @@ Currently this are:
 - gVisor-bin [abandoned]
 - hardened_malloc
 - libaslrmalloc [abandoned]
-- scala3-bin [abandoned]
 - scurl
+- typst
+- typst-lsp
 
 Getting started
 ---------------
