@@ -1,6 +1,6 @@
 Name:           hardened_malloc
 Version:        12
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Hardened allocator designed for modern systems
 
 License:        MIT
