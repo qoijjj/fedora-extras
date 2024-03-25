@@ -14,6 +14,10 @@ BuildRequires:  systemd-rpm-macros rpm-build rpmdevtools rpmlint make gcc gcc-c+
 # https://github.com/GrapheneOS/hardened_malloc/issues/200
 %global optflags %{optflags} -fno-fat-lto-objects
 
+%if 0%{?fedora} == 40
+%undefine _ld_pack_relocs
+%endif
+
 %description
 Hardened allocator designed for modern systems.
 
