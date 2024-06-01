@@ -66,6 +66,12 @@ sed -i 's/CONFIG_SEAL_METADATA := false/CONFIG_SEAL_METADATA := true/' config/pk
 
 patch -p1 < %{SOURCE1};
 
+
+make CONFIG_NATIVE=false VARIANT=default;
+make CONFIG_NATIVE=false VARIANT=light
+make CONFIG_NATIVE=false VARIANT=pkey
+
+%ifarch x86_86
 ln -s default.mk config/default-x86-64.mk;
 ln -s default.mk config/default-x86-64-v2.mk;
 ln -s default.mk config/default-x86-64-v3.mk;
@@ -81,44 +87,46 @@ ln -s pkey.mk config/pkey-x86-64-v2.mk;
 ln -s pkey.mk config/pkey-x86-64-v3.mk;
 ln -s pkey.mk config/pkey-x86-64-v4.mk;
 
-make CONFIG_NATIVE=false VARIANT=default;
 make CONFIG_NATIVE=false CONFIG_X86_64=true VARIANT=default-x86-64;
 make CONFIG_NATIVE=false CONFIG_X86_64_V2=true VARIANT=default-x86-64-v2;
 make CONFIG_NATIVE=false CONFIG_X86_64_V3=true VARIANT=default-x86-64-v3;
 make CONFIG_NATIVE=false CONFIG_X86_64_V4=true VARIANT=default-x86-64-v4;
 
-make CONFIG_NATIVE=false VARIANT=light
 make CONFIG_NATIVE=false CONFIG_X86_64=true VARIANT=light-x86-64;
 make CONFIG_NATIVE=false CONFIG_X86_64_V2=true VARIANT=light-x86-64-v2;
 make CONFIG_NATIVE=false CONFIG_X86_64_V3=true VARIANT=light-x86-64-v3;
 make CONFIG_NATIVE=false CONFIG_X86_64_V4=true VARIANT=light-x86-64-v4;
 
-make CONFIG_NATIVE=false VARIANT=pkey
 make CONFIG_NATIVE=false CONFIG_X86_64=true VARIANT=pkey-x86-64;
 make CONFIG_NATIVE=false CONFIG_X86_64_V2=true VARIANT=pkey-x86-64-v2;
 make CONFIG_NATIVE=false CONFIG_X86_64_V3=true VARIANT=pkey-x86-64-v3;
 make CONFIG_NATIVE=false CONFIG_X86_64_V4=true VARIANT=pkey-x86-64-v4;
+%endif
 
 # end section from https://github.com/divestedcg/rpm-hardened_malloc/blob/master/hardened_malloc.spec
 
 %install
 install -Dm4644 -s %{_srcdir}/out/libhardened_malloc.so %{buildroot}%{_libdir}/libhardened_malloc.so
+install -Dm4644 -s %{_srcdir}/out-light/libhardened_malloc-light.so %{buildroot}%{_libdir}/libhardened_malloc-light.so
+install -Dm4644 -s %{_srcdir}/out-pkey/libhardened_malloc-pkey.so %{buildroot}%{_libdir}/libhardened_malloc-pkey.so
+
+
+%ifarch x86_86
 install -Dm4644 -s %{_srcdir}/out-default-x86-64/libhardened_malloc-default-x86-64.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64/libhardened_malloc.so
 install -Dm4644 -s %{_srcdir}/out-default-x86-64-v2/libhardened_malloc-default-x86-64-v2.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v2/libhardened_malloc.so
 install -Dm4644 -s %{_srcdir}/out-default-x86-64-v3/libhardened_malloc-default-x86-64-v3.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v3/libhardened_malloc.so
 install -Dm4644 -s %{_srcdir}/out-default-x86-64-v4/libhardened_malloc-default-x86-64-v4.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v4/libhardened_malloc.so
 
-install -Dm4644 -s %{_srcdir}/out-light/libhardened_malloc-light.so %{buildroot}%{_libdir}/libhardened_malloc-light.so
 install -Dm4644 -s %{_srcdir}/out-light-x86-64/libhardened_malloc-light-x86-64.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64/libhardened_malloc-light.so;
 install -Dm4644 -s %{_srcdir}/out-light-x86-64-v2/libhardened_malloc-light-x86-64-v2.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v2/libhardened_malloc-light.so
 install -Dm4644 -s %{_srcdir}/out-light-x86-64-v3/libhardened_malloc-light-x86-64-v3.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v3/libhardened_malloc-light.so
 install -Dm4644 -s %{_srcdir}/out-light-x86-64-v4/libhardened_malloc-light-x86-64-v4.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v4/libhardened_malloc-light.so
 
-install -Dm4644 -s %{_srcdir}/out-pkey/libhardened_malloc-pkey.so %{buildroot}%{_libdir}/libhardened_malloc-pkey.so
 install -Dm4644 -s %{_srcdir}/out-pkey-x86-64/libhardened_malloc-pkey-x86-64.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64/libhardened_malloc-pkey.so;
 install -Dm4644 -s %{_srcdir}/out-pkey-x86-64-v2/libhardened_malloc-pkey-x86-64-v2.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v2/libhardened_malloc-pkey.so;
 install -Dm4644 -s %{_srcdir}/out-pkey-x86-64-v3/libhardened_malloc-pkey-x86-64-v3.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v3/libhardened_malloc-pkey.so;
 install -Dm4644 -s %{_srcdir}/out-pkey-x86-64-v4/libhardened_malloc-pkey-x86-64-v4.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v4/libhardened_malloc-pkey.so;
+%endif
 
 %check
 cd %{_srcdir};
@@ -130,6 +138,7 @@ make test
 %{_libdir}/libhardened_malloc.so
 %{_libdir}/libhardened_malloc-light.so
 %{_libdir}/libhardened_malloc-pkey.so
+%ifarch x86_86
 %{_libdir}/glibc-hwcaps/x86-64/libhardened_malloc.so
 %{_libdir}/glibc-hwcaps/x86-64-v2/libhardened_malloc.so
 %{_libdir}/glibc-hwcaps/x86-64-v3/libhardened_malloc.so
@@ -142,6 +151,7 @@ make test
 %{_libdir}/glibc-hwcaps/x86-64-v2/libhardened_malloc-pkey.so
 %{_libdir}/glibc-hwcaps/x86-64-v3/libhardened_malloc-pkey.so
 %{_libdir}/glibc-hwcaps/x86-64-v4/libhardened_malloc-pkey.so
+%endif
 
 %changelog
 * Tue Dec 12 2023 rusty-snake - 12-5
