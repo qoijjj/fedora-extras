@@ -121,6 +121,7 @@ install -Dm4644 -s %{_srcdir}/out-pkey-x86-64-v3/libhardened_malloc-pkey-x86-64-
 install -Dm4644 -s %{_srcdir}/out-pkey-x86-64-v4/libhardened_malloc-pkey-x86-64-v4.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v4/libhardened_malloc-pkey.so;
 
 %check
+cd %{_srcdir};
 make test
 
 %files
