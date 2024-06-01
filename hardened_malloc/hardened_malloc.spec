@@ -6,7 +6,7 @@ Summary:        Hardened allocator designed for modern systems
 License:        MIT
 URL:            https://github.com/GrapheneOS/hardened_malloc
 Source0:        %{url}/archive/refs/tags/%{version}.tar.gz
-
+Source1:        opt.patch
 BuildRequires:  systemd-rpm-macros rpm-build rpmdevtools rpmlint make gcc gcc-c++
 
 %global debug_package %{nil}
