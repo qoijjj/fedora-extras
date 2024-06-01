@@ -125,8 +125,8 @@ cd %{_srcdir};
 make test
 
 %files
-%license LICENSE CREDITS
-%doc README.md
+%license %{_srcdir}/LICENSE %{_srcdir}/CREDITS
+%doc %{_srcdir}/README.md
 %{_libdir}/libhardened_malloc.so
 %{_libdir}/libhardened_malloc-light.so
 %{_libdir}/libhardened_malloc-pkey.so
