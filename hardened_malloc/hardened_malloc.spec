@@ -25,14 +25,6 @@ It has integration into Android's Bionic libc and can be used externally with
 musl and glibc as a dynamic library for use on other Linux-based platforms. It
 will gain more portability / integration over time.
 
-
-%prep
-%autosetup
-cp config/default.mk config/pkey.mk
-sed -i 's/CONFIG_SEAL_METADATA := false/CONFIG_SEAL_METADATA := true/' config/pkey.mk
-
-%build
-
 # start section from https://github.com/divestedcg/rpm-hardened_malloc/blob/master/hardened_malloc.spec
 #
 # MIT License
@@ -58,7 +50,19 @@ sed -i 's/CONFIG_SEAL_METADATA := false/CONFIG_SEAL_METADATA := true/' config/pk
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+%prep
+
+%define _srcdir hardened_malloc
+
+%{__mkdir} %{_srcdir};
+%{__tar} -x -f %{SOURCE0} -C %{_srcdir} --strip-components 1;
+
+%build
+
 cd %{_srcdir};
+
+cp default.mk config/pkey.mk
+sed -i 's/CONFIG_SEAL_METADATA := false/CONFIG_SEAL_METADATA := true/' config/pkey.mk
 
 patch -p1 < %{SOURCE1};
 
