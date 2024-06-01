@@ -71,7 +71,7 @@ make CONFIG_NATIVE=false VARIANT=default;
 make CONFIG_NATIVE=false VARIANT=light
 make CONFIG_NATIVE=false VARIANT=pkey
 
-%ifarch x86_86
+%ifarch x86_64
 ln -s default.mk config/default-x86-64.mk;
 ln -s default.mk config/default-x86-64-v2.mk;
 ln -s default.mk config/default-x86-64-v3.mk;
@@ -111,7 +111,7 @@ install -Dm4644 -s %{_srcdir}/out-light/libhardened_malloc-light.so %{buildroot}
 install -Dm4644 -s %{_srcdir}/out-pkey/libhardened_malloc-pkey.so %{buildroot}%{_libdir}/libhardened_malloc-pkey.so
 
 
-%ifarch x86_86
+%ifarch x86_64
 install -Dm4644 -s %{_srcdir}/out-default-x86-64/libhardened_malloc-default-x86-64.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64/libhardened_malloc.so
 install -Dm4644 -s %{_srcdir}/out-default-x86-64-v2/libhardened_malloc-default-x86-64-v2.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v2/libhardened_malloc.so
 install -Dm4644 -s %{_srcdir}/out-default-x86-64-v3/libhardened_malloc-default-x86-64-v3.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v3/libhardened_malloc.so
@@ -138,7 +138,7 @@ make test
 %{_libdir}/libhardened_malloc.so
 %{_libdir}/libhardened_malloc-light.so
 %{_libdir}/libhardened_malloc-pkey.so
-%ifarch x86_86
+%ifarch x86_64
 %{_libdir}/glibc-hwcaps/x86-64/libhardened_malloc.so
 %{_libdir}/glibc-hwcaps/x86-64-v2/libhardened_malloc.so
 %{_libdir}/glibc-hwcaps/x86-64-v3/libhardened_malloc.so
