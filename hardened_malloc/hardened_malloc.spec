@@ -110,7 +110,7 @@ install -Dm4644 -s %{_srcdir}/out-default-x86-64-v4/libhardened_malloc-default-x
 
 install -Dm4644 -s %{_srcdir}/out-light/libhardened_malloc-light.so %{buildroot}%{_libdir}/libhardened_malloc-light.so
 install -Dm4644 -s %{_srcdir}/out-light-x86-64/libhardened_malloc-light-x86-64.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64/libhardened_malloc-light.so;
-install -Dm4644 -s %{_srcdir}/out-light-x86-64-v2/libhardened_malloc-light-x86-64-v2/so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v2/libhardened_malloc-light.so
+install -Dm4644 -s %{_srcdir}/out-light-x86-64-v2/libhardened_malloc-light-x86-64-v2.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v2/libhardened_malloc-light.so
 install -Dm4644 -s %{_srcdir}/out-light-x86-64-v3/libhardened_malloc-light-x86-64-v3.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v3/libhardened_malloc-light.so
 install -Dm4644 -s %{_srcdir}/out-light-x86-64-v4/libhardened_malloc-light-x86-64-v4.so %{buildroot}%{_libdir}/glibc-hwcaps/x86-64-v4/libhardened_malloc-light.so
 
