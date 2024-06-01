@@ -33,23 +33,23 @@ sed -i 's/CONFIG_SEAL_METADATA := false/CONFIG_SEAL_METADATA := true/' config/pk
 
 
 %build
-make CONFIG_NATIVE=false VARIANT=default;
-make CONFIG_NATIVE=false CONFIG_X86_64=true VARIANT=default-x86-64;
-make CONFIG_NATIVE=false CONFIG_X86_64_V2=true VARIANT=default-x86-64-v2;
-make CONFIG_NATIVE=false CONFIG_X86_64_V3=true VARIANT=default-x86-64-v3;
-make CONFIG_NATIVE=false CONFIG_X86_64_V4=true VARIANT=default-x86-64-v4;
+make CONFIG_NATIVE=false CONFIG_WERROR=false VARIANT=default;
+make CONFIG_NATIVE=false CONFIG_X86_64=true CONFIG_WERROR=false VARIANT=default-x86-64;
+make CONFIG_NATIVE=false CONFIG_X86_64_V2=true CONFIG_WERROR=false VARIANT=default-x86-64-v2;
+make CONFIG_NATIVE=false CONFIG_X86_64_V3=true CONFIG_WERROR=false VARIANT=default-x86-64-v3;
+make CONFIG_NATIVE=false CONFIG_X86_64_V4=true CONFIG_WERROR=false VARIANT=default-x86-64-v4;
 
 make CONFIG_NATIVE=false VARIANT=light
-make CONFIG_NATIVE=false CONFIG_X86_64=true VARIANT=light-x86-64;
-make CONFIG_NATIVE=false CONFIG_X86_64_V2=true VARIANT=light-x86-64-v2;
-make CONFIG_NATIVE=false CONFIG_X86_64_V3=true VARIANT=light-x86-64-v3;
-make CONFIG_NATIVE=false CONFIG_X86_64_V4=true VARIANT=light-x86-64-v4;
+make CONFIG_NATIVE=false CONFIG_X86_64=true CONFIG_WERROR=false VARIANT=light-x86-64;
+make CONFIG_NATIVE=false CONFIG_X86_64_V2=true CONFIG_WERROR=false VARIANT=light-x86-64-v2;
+make CONFIG_NATIVE=false CONFIG_X86_64_V3=true CONFIG_WERROR=false VARIANT=light-x86-64-v3;
+make CONFIG_NATIVE=false CONFIG_X86_64_V4=true CONFIG_WERROR=false VARIANT=light-x86-64-v4;
 
 make CONFIG_NATIVE=false VARIANT=pkey
-make CONFIG_NATIVE=false CONFIG_X86_64=true VARIANT=pkey-x86-64;
-make CONFIG_NATIVE=false CONFIG_X86_64_V2=true VARIANT=pkey-x86-64-v2;
-make CONFIG_NATIVE=false CONFIG_X86_64_V3=true VARIANT=pkey-x86-64-v3;
-make CONFIG_NATIVE=false CONFIG_X86_64_V4=true VARIANT=pkey-x86-64-v4;
+make CONFIG_NATIVE=false CONFIG_X86_64=true CONFIG_WERROR=false VARIANT=pkey-x86-64;
+make CONFIG_NATIVE=false CONFIG_X86_64_V2=true CONFIG_WERROR=false VARIANT=pkey-x86-64-v2;
+make CONFIG_NATIVE=false CONFIG_X86_64_V3=true CONFIG_WERROR=false VARIANT=pkey-x86-64-v3;
+make CONFIG_NATIVE=false CONFIG_X86_64_V4=true CONFIG_WERROR=false VARIANT=pkey-x86-64-v4;
 
 %install
 install -Dm4644 -s out/libhardened_malloc.so %{buildroot}%{_libdir}/libhardened_malloc.so
