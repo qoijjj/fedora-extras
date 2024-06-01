@@ -59,7 +59,7 @@ sed -i 's/CONFIG_SEAL_METADATA := false/CONFIG_SEAL_METADATA := true/' config/pk
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-patch -p1 < %{SOURCE0};
+patch -p1 < %{SOURCE1};
 
 ln -s config/default.mk config/default-x86-64.mk;
 ln -s config/default.mk config/default-x86-64-v2.mk;
