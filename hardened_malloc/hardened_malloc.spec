@@ -61,7 +61,7 @@ will gain more portability / integration over time.
 
 cd %{_srcdir};
 
-cp default.mk config/pkey.mk
+cp config/default.mk config/pkey.mk
 sed -i 's/CONFIG_SEAL_METADATA := false/CONFIG_SEAL_METADATA := true/' config/pkey.mk
 
 patch -p1 < %{SOURCE1};
