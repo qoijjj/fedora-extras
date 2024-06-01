@@ -31,7 +31,6 @@ will gain more portability / integration over time.
 cp config/default.mk config/pkey.mk
 sed -i 's/CONFIG_SEAL_METADATA := false/CONFIG_SEAL_METADATA := true/' config/pkey.mk
 
-
 %build
 
 # start section from https://github.com/divestedcg/rpm-hardened_malloc/blob/master/hardened_malloc.spec
@@ -59,22 +58,24 @@ sed -i 's/CONFIG_SEAL_METADATA := false/CONFIG_SEAL_METADATA := true/' config/pk
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+cd %{_srcdir};
+
 patch -p1 < %{SOURCE1};
 
-ln -s config/default.mk config/default-x86-64.mk;
-ln -s config/default.mk config/default-x86-64-v2.mk;
-ln -s config/default.mk config/default-x86-64-v3.mk;
-ln -s config/default.mk config/default-x86-64-v4.mk;
+ln -s default.mk config/default-x86-64.mk;
+ln -s default.mk config/default-x86-64-v2.mk;
+ln -s default.mk config/default-x86-64-v3.mk;
+ln -s default.mk config/default-x86-64-v4.mk;
 
-ln -s config/light.mk config/light-x86-64.mk;
-ln -s config/light.mk config/light-x86-64-v2.mk;
-ln -s config/light.mk config/light-x86-64-v3.mk;
-ln -s config/light.mk config/light-x86-64-v4.mk;
+ln -s light.mk config/light-x86-64.mk;
+ln -s light.mk config/light-x86-64-v2.mk;
+ln -s light.mk config/light-x86-64-v3.mk;
+ln -s light.mk config/light-x86-64-v4.mk;
 
-ln -s config/pkey.mk config/pkey-x86-64.mk;
-ln -s config/pkey.mk config/pkey-x86-64-v2.mk;
-ln -s config/pkey.mk config/pkey-x86-64-v3.mk;
-ln -s config/pkey.mk config/pkey-x86-64-v4.mk;
+ln -s pkey.mk config/pkey-x86-64.mk;
+ln -s pkey.mk config/pkey-x86-64-v2.mk;
+ln -s pkey.mk config/pkey-x86-64-v3.mk;
+ln -s pkey.mk config/pkey-x86-64-v4.mk;
 
 make CONFIG_NATIVE=false VARIANT=default;
 make CONFIG_NATIVE=false CONFIG_X86_64=true VARIANT=default-x86-64;
