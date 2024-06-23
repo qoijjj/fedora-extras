@@ -4,15 +4,8 @@ fedora-extras
 Additional package for Fedora, missing in the offical repositories and RPMFusion.
 
 Currently this are:
-- brave-browser-bin [abandoned; should still work]
 - bubblejail
-- gVisor-bin [abandoned]
 - hardened_malloc
-- libaslrmalloc [abandoned]
-- scurl
-- typos-lsp
-- typst
-- typst-lsp
 
 Getting started
 ---------------

@@ -1,2 +1,0 @@
-#!/bin/bash
-exec curl --tlsv1.3 --proto =https "$@"
